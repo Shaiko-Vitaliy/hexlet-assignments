@@ -7,17 +7,13 @@ import java.util.stream.Collectors;
 
 // BEGIN
 class App {
+    private static List<String> FREE_DOMAIN = Arrays.asList(
+            "gmail.com", "yandex.ru", "hotmail.com");
     public static long getCountOfFreeEmails(List<String> emails) {
-        var result1 = emails.stream()
-                .filter(email -> email.endsWith("yandex.ru"))
+        return emails.stream()
+                .map(email -> email.split("@")[1])
+                .filter(FREE_DOMAIN :: contains)
                 .count();
-        var result2 = emails.stream()
-                .filter(email -> email.endsWith("gmail.com"))
-                .count();
-        var result3 = emails.stream()
-                .filter(email -> email.endsWith("hotmail.com"))
-                .count();
-        return result1 + result2 + result3;
     }
 }
 // END

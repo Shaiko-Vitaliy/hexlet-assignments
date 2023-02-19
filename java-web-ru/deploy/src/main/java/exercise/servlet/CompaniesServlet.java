@@ -28,10 +28,15 @@ public class CompaniesServlet extends HttpServlet {
             out.close();
         } else {
             var searchValue = request.getParameter("search");
+            var errorMassageSwitch = true;
             for (String item : getCompanies()) {
                 if (item.contains(searchValue)) {
                     res.append(item).append("\n");
+                    errorMassageSwitch = false;
                 }
+            }
+            if (errorMassageSwitch) {
+                res.append("Companies not found");
             }
             out.println(res.toString());
             out.close();

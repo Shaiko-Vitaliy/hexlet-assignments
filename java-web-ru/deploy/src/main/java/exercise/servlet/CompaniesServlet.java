@@ -19,16 +19,21 @@ public class CompaniesServlet extends HttpServlet {
         // BEGIN
         PrintWriter out = response.getWriter();
         var queryString = request.getQueryString();
+        StringBuilder res = new StringBuilder();
         if (queryString == null || !queryString.contains("search")) {
-            out.println(getCompanies());
+            for (String item : getCompanies()) {
+                    res.append(item).append("\n");
+                }
+            out.println(res);
             out.close();
         } else {
             var searchValue = request.getParameter("search");
             for (String item : getCompanies()) {
                 if (item.contains(searchValue)) {
-                    out.println(item);
+                    res.append(item).append("\n");
                 }
             }
+            out.println(res.toString());
             out.close();
         }
         // END

@@ -172,7 +172,13 @@ public class UsersServlet extends HttpServlet {
             return;
         }
         // BEGIN
+        String firstName = user.get("firstName");
+        String lastName = user.get("lastName");
+        String email = user.get("email");
         request.setAttribute("user", user);
+        request.setAttribute("firstName", firstName);
+        request.setAttribute("lastName", lastName);
+        request.setAttribute("email", email);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/edit.jsp");
         requestDispatcher.forward(request, response);
         // END
@@ -194,10 +200,10 @@ public class UsersServlet extends HttpServlet {
         String email = request.getParameter("email");
         if (firstName.isEmpty() || lastName.isEmpty()) {
             request.setAttribute("user", user);
-            request.setAttribute("error", "Error 422. Имя и Фамилия не могут быть пустыми");
             request.setAttribute("firstName", firstName);
             request.setAttribute("lastName", lastName);
             request.setAttribute("email", email);
+            request.setAttribute("error", "Error 422. Имя и Фамилия не могут быть пустыми");
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/edit.jsp");
             response.setStatus(422);
             requestDispatcher.forward(request, response);
@@ -206,7 +212,6 @@ public class UsersServlet extends HttpServlet {
         user.put("firstName", firstName);
         user.put("lastName", lastName);
         user.put("email", email);
-        request.setAttribute("user", user);
         var index = users.indexOf(user);
         users.set(index, user);
         request.setAttribute("user", user);

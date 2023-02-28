@@ -62,11 +62,11 @@ public class SessionServlet extends HttpServlet {
         if (user == null || !inputPassword.equals("password")) {
             session.setAttribute("flash", "Неверные логин или пароль");
             response.setStatus(422);
-            request.setAttribute("email", inputEmail);
+            request.setAttribute("user", user);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
             requestDispatcher.forward(request, response);
+            return;
         }
-        assert user != null;
         session.setAttribute("userId", user.get("id"));
         session.setAttribute("flash", "Вы успешно вошли");
         response.sendRedirect("/");

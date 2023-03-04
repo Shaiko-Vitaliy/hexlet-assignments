@@ -1,0 +1,9 @@
+2023-03-04 14:32:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Нет данных
+No data is available [2000-200]
+2023-03-04 14:32:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Нет данных
+No data is available [2000-200]
+2023-03-04 14:33:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Нет данных
+No data is available [2000-200]

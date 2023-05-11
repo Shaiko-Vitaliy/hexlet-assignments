@@ -5,10 +5,8 @@ import exercise.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
 
 // Зависимости для самостоятельной работы
  import org.springframework.data.querydsl.binding.QuerydslPredicate;
@@ -24,18 +22,18 @@ public class UsersController {
     private UserRepository userRepository;
 
     // BEGIN
-
-    @GetMapping(path = "")
-    public Iterable<User> getUserByFirstNameAndLastName(@RequestParam(defaultValue = "") String firstName,
-                                                        @RequestParam(defaultValue = "") String lastName) {
-        return userRepository.findAll(QUser.user.firstName.containsIgnoreCase(firstName)
-                .and(QUser.user.lastName.containsIgnoreCase(lastName)));
-    }
-//    @RequestMapping(value = "/", method = RequestMethod.GET)
-//    public String getUserByFirstNameAndLastName(Model model, @QuerydslPredicate(root = User.class) Predicate predicate, Pageable pageable) {
-//        model.addAttribute("users", userRepository.findAll(predicate, (Sort) pageable));
-//        return "index";
+        //это одно решение
+//    @GetMapping(path = "")
+//    public Iterable<User> getUserByFirstNameAndLastName(@RequestParam(defaultValue = "") String firstName,
+//                                                        @RequestParam(defaultValue = "") String lastName) {
+//        return userRepository.findAll(QUser.user.firstName.containsIgnoreCase(firstName)
+//                .and(QUser.user.lastName.containsIgnoreCase(lastName)));
 //    }
+//это второе решение
+    @GetMapping(path = "")
+     public Iterable<User> getUsers(@QuerydslPredicate(root = User.class) Predicate predicate) {
+         return userRepository.findAll(predicate);
+     }
     // END
 }
 

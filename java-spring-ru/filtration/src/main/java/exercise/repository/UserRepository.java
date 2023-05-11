@@ -16,8 +16,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends
-//    CrudRepository<User, Long>,
-        JpaRepository<User, Long>,
+    CrudRepository<User, Long>,
+//        JpaRepository<User, Long>,
     QuerydslPredicateExecutor<User>,
     QuerydslBinderCustomizer<QUser> {
     @Override
@@ -25,11 +25,12 @@ public interface UserRepository extends
         // Дополнительная задача
 
         // BEGIN
-//        bindings.bind(user.firstName).first(StringExpression::containsIgnoreCase);
-//        bindings.bind(user.lastName).first(StringExpression::containsIgnoreCase);
-//        bindings.bind(user.email).first(StringExpression::containsIgnoreCase);
-//        bindings.bind(user.profession).first(StringExpression::containsIgnoreCase);
-//        bindings.bind(user.gender).first(SimpleExpression::eq);
+        //это второе решение, при первом решении можно этот метод оставить пустым
+        bindings.bind(user.firstName).first(StringExpression::containsIgnoreCase);
+        bindings.bind(user.lastName).first(StringExpression::containsIgnoreCase);
+        bindings.bind(user.email).first(StringExpression::containsIgnoreCase);
+        bindings.bind(user.profession).first(StringExpression::containsIgnoreCase);
+        bindings.bind(user.gender).first(SimpleExpression::eq);
         // END
     }
 
